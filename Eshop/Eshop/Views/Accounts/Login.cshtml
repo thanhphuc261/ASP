@@ -1,0 +1,17 @@
+﻿@model Account
+
+<form asp-action="Login">
+    <div class="form-group">
+        <label asp-for="Username"></label>
+        <input class="form-control" asp-for="Username" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input class="form-control" asp-for="Password" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary"> Đăng nhập</button>
+    <br />
+    <span class="text-danger">@ViewBag.ErrorMessage</span>
+</form>

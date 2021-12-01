@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Eshop.Models.Product>
+
+@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+}
+
+<h1>Danh sách sản phẩm</h1>
+
+
+<div class="row">
+    @foreach (Product p in Model)
+    {
+    <div class="col-md-3 mb-5">
+        <div class="card h-100 border-0" >
+            <img class="card-img-top" src="~/img/product/@p.Image" alt="Card image">
+            <div class="card-body">
+                <h4 class="card-title">@p.Name</h4>
+                <p class="card-text"> Giá tiền : @p.Price</p>
+                <p class="card-text"> Tác giả : @p.Description</p>
+                
+            </div>
+            <div class="card-footer border-0 bg-white" >
+                <a class="btn btn-primary" asp-controller="Carts" asp-action="Add" asp-route-id="@p.Id"><i class="fa fa-cart-plus"></i></a>
+                <a href="#" class="btn btn-success"><i class="fa fa-credit-card"></i>Mua ngay</a>
+            </div>
+        </div>
+    </div>
+    }
+</div>

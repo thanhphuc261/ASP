@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Eshop.Models.Cart>
+
+@{
+    ViewData["Title"] = "Giỏ hàng";
+    int i = 1;
+}
+
+<h1>Giỏ hàng</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>STT </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.Product.Price)
+            </th>
+
+            <th>Thành tiền</th>
+            <th>Chức năng</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@(i++)</td>
+            <td>
+                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId">
+                    <img src="~/img/product/@item.Product.Image" style="width:100px" />
+                </a>
+            </td>
+            <td>
+                
+                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId">
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+              @item.Product.Price.ToString("#,##0")
+            </td>
+            <td>
+                @((item.Quantity*item.Product.Price).ToString("#,##0"))
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-danger" ><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<h3>Tổng tiền @ViewBag.Total.ToString("#,##0") VNĐ</h3>
+<a asp-action="Pay" class="btn btn-success"><i class="fa fa-check"></i>Thanh Toán</a>
